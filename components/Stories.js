@@ -22,5 +22,5 @@ const stories = [
 ]
 
 export default function Stories() {
-  return <div></div>
+  return <div>I AM STORIES</div>
 }
