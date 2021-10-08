@@ -3,12 +3,25 @@ import Image from 'next/image'
 import { useSession } from 'next-auth/client'
 import { EmojiHappyIcon } from '@heroicons/react/solid'
 import { CameraIcon, VideoCameraIcon } from '@heroicons/react/solid'
+import { db, storage } from '../firebase'
+import firebase from 'firebase/app'
 
 export default function InputBox() {
   const [session] = useSession()
+  const inputRef = React.useRef(null)
 
   function sendPost(e) {
     e.preventDefault()
+
+    if (!inputRef.current.value) return
+
+    db.collection('posts').add({
+      message: inputRef.current.value,
+      name: session.user.name,
+      email: session.user.email,
+      image: session.user.image,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    })
   }
 
   return (
@@ -24,6 +37,7 @@ export default function InputBox() {
         />
         <form className="flex flex-1" action="">
           <input
+            ref={inputRef}
             className="rounded-full h-12 bg-gray-100 flex-grow px-5 focus:outline-none"
             type="text"
             placeholder={`What's on your mind, ${session.user.name}?`}
