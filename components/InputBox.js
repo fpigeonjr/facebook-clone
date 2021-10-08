@@ -22,6 +22,8 @@ export default function InputBox() {
       image: session.user.image,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     })
+
+    inputRef.current.value = ''
   }
 
   return (
