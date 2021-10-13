@@ -1,5 +1,6 @@
 import Stories from './Stories'
 import InputBox from './InputBox'
+import Posts from './Posts'
 
 export default function Feed() {
   return (
@@ -7,7 +8,7 @@ export default function Feed() {
       <div className="mx-auto max-w-md md:max-w-lg">
         <Stories />
         <InputBox />
-        {/* Posts */}
+        <Posts />
       </div>
     </div>
   )
